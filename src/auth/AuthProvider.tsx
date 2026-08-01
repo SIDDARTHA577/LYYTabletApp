@@ -10,6 +10,7 @@ import {
 import { useAuthStore, type SessionUser } from './useAuthStore';
 import { deviceAuth } from './deviceAuth';
 import { useActivityStore } from '../features/activity/useActivityStore';
+import { applyWebReviewDeepLink } from '../navigation/webDeepLinks';
 
 interface AuthContextValue {
   signIn: (email: string, password: string) => Promise<void>;
@@ -38,6 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // access token, otherwise fall back to full login.
   useEffect(() => {
     useActivityStore.getState().hydrate();
+    if (applyWebReviewDeepLink()) return;
     (async () => {
       const mpinConfigured = await deviceAuth.isMpinConfigured();
       const rememberedEmail = await deviceAuth.getRememberedEmail();
