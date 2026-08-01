@@ -29,7 +29,7 @@ export function MpinInput({
             key={i}
             style={[
               styles.box,
-              { borderColor: error ? theme.colors.error : '#CCD3E3' },
+              { backgroundColor: theme.colors.surfaceVariant, borderColor: error ? theme.colors.error : theme.colors.outline },
               i < value.length && { borderColor: theme.colors.primary, backgroundColor: theme.colors.primaryContainer },
             ]}
           >
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   boxRow: { flexDirection: 'row', gap: 14 },
   box: {
     width: 52, height: 60, borderRadius: 12, borderWidth: 1.5,
-    alignItems: 'center', justifyContent: 'center', backgroundColor: '#FAFBFD',
+    alignItems: 'center', justifyContent: 'center',
   },
   dot: { width: 10, height: 10, borderRadius: 5, backgroundColor: 'transparent' },
   hiddenInput: { position: 'absolute', opacity: 0, height: 1, width: 1 },

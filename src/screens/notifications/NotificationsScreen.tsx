@@ -7,6 +7,7 @@ import { EmptyState } from '../../components/EmptyState';
 import { BottomNavBar } from '../../components/BottomNavBar';
 import { useActivityStore } from '../../features/activity/useActivityStore';
 import { useLanguage } from '../../i18n/LanguageContext';
+import tokens from '../../theme/tokens';
 
 export function NotificationsScreen() {
   const { t } = useLanguage();
@@ -23,7 +24,7 @@ export function NotificationsScreen() {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: tokens.color.background }}>
       <AppHeader
         title={t('notifications')}
         showBack
@@ -44,7 +45,7 @@ export function NotificationsScreen() {
         data={entries}
         keyExtractor={(e) => e.id}
         contentContainerStyle={entries.length === 0 ? { flex: 1 } : styles.list}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        ItemSeparatorComponent={() => <View style={[styles.separator, { backgroundColor: tokens.color.border }]} />}
         renderItem={({ item }) => <ActivityListItem entry={item} />}
         ListEmptyComponent={
           <EmptyState icon="bell-outline" title={t('noNotifications')} description={t('noNotificationsBody')} />
@@ -55,7 +56,9 @@ export function NotificationsScreen() {
   );
 }
 
+// backgroundColor applied inline above (see the note in ReportsScreen.tsx —
+// StyleSheet.create() freezes values at import time, not theme-reactive).
 const styles = StyleSheet.create({
   list: { padding: 20, paddingBottom: 96 },
-  separator: { height: 1, backgroundColor: '#EEF1F8' },
+  separator: { height: 1 },
 });

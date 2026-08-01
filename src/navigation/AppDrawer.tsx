@@ -313,6 +313,11 @@ export function AppDrawer() {
   const isWide = width >= 768;
   const isCollapsed = useDrawerStore((s) => s.isCollapsed);
   const formActive = useFabricFormNavStore((s) => s.active);
+  // Forces this component (and the drawerStyle/sceneContainerStyle values
+  // below, which read tokens.color directly rather than a className) to
+  // re-render when the theme toggles — see the matching note on
+  // CustomDrawerContent above.
+  useThemeStore((s) => s.preference);
 
   const drawerWidth = isWide ? (isCollapsed ? 80 : 260) : Math.min(300, width * 0.8);
 
@@ -322,6 +327,11 @@ export function AppDrawer() {
       screenOptions={{
         headerShown: false,
         drawerType: isWide ? 'permanent' : 'front',
+        // Every screen's container defaults to React Navigation's own
+        // (light-only) theme background otherwise — this is what made
+        // screens with sparser layouts (Reports, Notifications) show a
+        // wrong-colored background behind their cards in dark mode.
+        sceneContainerStyle: { backgroundColor: tokens.color.background },
         drawerStyle: {
           backgroundColor: tokens.color.background,
           borderRightWidth: 1,

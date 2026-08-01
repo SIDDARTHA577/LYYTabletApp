@@ -39,7 +39,7 @@ export function AppHeader({
   return (
     <Appbar.Header
       style={{
-        backgroundColor: 'rgba(255,255,255,0.92)',
+        backgroundColor: tokens.color.surface,
         borderBottomWidth: 1,
         borderBottomColor: tokens.color.border,
         elevation: 0,

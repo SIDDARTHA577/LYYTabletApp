@@ -16,6 +16,7 @@ import { styleOf } from '../../features/dashboard/statBuckets';
 import { aggregateDefectFrequency, last6MonthsSeries, last7DaysSeries } from '../../features/dashboard/defectReport';
 import { statTileColors, brandColors } from '../../theme/paperTheme';
 import { useLanguage } from '../../i18n/LanguageContext';
+import tokens from '../../theme/tokens';
 
 type Range = '7d' | '6m';
 type StatusFilter = 'all' | 'draft' | 'submitted';
@@ -62,7 +63,7 @@ export function ReportsScreen() {
   }, [items, statusFilter, search]);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: tokens.color.background }}>
       <AppHeader title={t('reports')} showBack />
       <ScrollView contentContainerStyle={styles.content}>
 
@@ -71,17 +72,17 @@ export function ReportsScreen() {
             placeholder={t('searchPlaceholder')}
             value={search}
             onChangeText={setSearch}
-            style={styles.search}
+            style={[styles.search, { backgroundColor: tokens.color.background, borderColor: tokens.color.border }]}
             inputStyle={styles.searchInput}
           />
           <View style={styles.chipRow}>
-            <Chip selected={statusFilter === 'all'} onPress={() => setStatusFilter('all')} compact style={styles.chip}>
+            <Chip selected={statusFilter === 'all'} onPress={() => setStatusFilter('all')} compact style={[styles.chip, { backgroundColor: tokens.color.background }]}>
               {t('filterAll')}
             </Chip>
-            <Chip selected={statusFilter === 'draft'} onPress={() => setStatusFilter('draft')} compact style={styles.chip}>
+            <Chip selected={statusFilter === 'draft'} onPress={() => setStatusFilter('draft')} compact style={[styles.chip, { backgroundColor: tokens.color.background }]}>
               {t('filterDraft')}
             </Chip>
-            <Chip selected={statusFilter === 'submitted'} onPress={() => setStatusFilter('submitted')} compact style={styles.chip}>
+            <Chip selected={statusFilter === 'submitted'} onPress={() => setStatusFilter('submitted')} compact style={[styles.chip, { backgroundColor: tokens.color.background }]}>
               {t('filterSubmitted')}
             </Chip>
           </View>
@@ -102,13 +103,13 @@ export function ReportsScreen() {
 
               return (
               <View key={item._id} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-                  <View style={styles.reportRow}>
-                    <View style={styles.reportIcon}>
-                      <MaterialCommunityIcons name="file-document-outline" size={20} color="#6A7185" />
+                  <View style={[styles.reportRow, { backgroundColor: tokens.color.surface, borderColor: tokens.color.border }]}>
+                    <View style={[styles.reportIcon, { backgroundColor: tokens.color.background }]}>
+                      <MaterialCommunityIcons name="file-document-outline" size={20} color={tokens.color.textSecondary} />
                     </View>
                     <View style={styles.reportInfo}>
-                      <Text style={styles.reportName} numberOfLines={1}>{factoryName} · {typeName || 'Inspection'}</Text>
-                      <Text style={styles.reportType} numberOfLines={1}>{[(item as any).location || mockLocation, styleOf(item), dayjs(item.startedAt).format('MMM D, YYYY')].filter(Boolean).join(' · ')}</Text>
+                      <Text style={[styles.reportName, { color: tokens.color.textPrimary }]} numberOfLines={1}>{factoryName} · {typeName || 'Inspection'}</Text>
+                      <Text style={[styles.reportType, { color: tokens.color.textSecondary }]} numberOfLines={1}>{[(item as any).location || mockLocation, styleOf(item), dayjs(item.startedAt).format('MMM D, YYYY')].filter(Boolean).join(' · ')}</Text>
                     </View>
                   </View>
                 <Chip icon="eye" onPress={() => {}} style={{ marginLeft: 8, height: 36 }}>Preview</Chip>
@@ -124,17 +125,20 @@ export function ReportsScreen() {
   );
 }
 
+// Color values (background/border/text) are applied inline above instead of
+// here — StyleSheet.create() runs once at import time, which would freeze
+// them at whatever tokens.color was at that moment instead of tracking
+// theme changes.
 const styles = StyleSheet.create({
   content: { padding: 32, paddingBottom: 12 },
   rangeToggle: { flexDirection: 'row', gap: 6 },
-  rangeChip: { backgroundColor: '#F3F4F6' },
-  search: { borderRadius: 8, backgroundColor: '#F3F4F6', elevation: 0, marginBottom: 10, borderWidth: 1, borderColor: '#EAEAEA' },
+  search: { borderRadius: 8, elevation: 0, marginBottom: 10, borderWidth: 1 },
   searchInput: { fontSize: 14, minHeight: 0 },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 14 },
-  chip: { backgroundColor: '#F3F4F6' },
-  reportRow: { flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#EAEAEA', borderRadius: 8, padding: 12, marginRight: 8 },
-  reportIcon: { width: 36, height: 36, borderRadius: 8, backgroundColor: '#F3F4F6', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
+  chip: {},
+  reportRow: { flex: 1, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderRadius: 8, padding: 12, marginRight: 8 },
+  reportIcon: { width: 36, height: 36, borderRadius: 8, alignItems: 'center', justifyContent: 'center', marginRight: 12 },
   reportInfo: { flex: 1 },
-  reportName: { fontSize: 14, fontWeight: '600', color: '#111827' },
-  reportType: { fontSize: 12, color: '#6B7280', marginTop: 2 },
+  reportName: { fontSize: 14, fontWeight: '600' },
+  reportType: { fontSize: 12, marginTop: 2 },
 });
