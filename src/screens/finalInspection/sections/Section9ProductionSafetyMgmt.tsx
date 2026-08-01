@@ -23,24 +23,26 @@ function YesNoQuestion({
   return (
     <View className={`mb-4 ${nested ? 'ml-8 border-l-2 border-border pl-4' : ''}`}>
       <Text className="text-body text-textPrimary mb-2 font-medium">{label}</Text>
-      <SegmentedButtons
-        value={valueObj?.answer || ''}
-        onValueChange={(v) => onChange({ ...valueObj, answer: v as 'YES' | 'NO' })}
-        buttons={[
-          { value: 'YES', label: 'YES' },
-          { value: 'NO', label: 'NO' },
-        ]}
-        style={{ maxWidth: 200, marginBottom: 8 }}
-      />
-      {valueObj?.answer && (
-        <View className="mt-2 p-2 border border-border rounded-md bg-background">
-          <FileUploadRow 
-            label="Supporting Document" 
-            fileName={valueObj.file ? valueObj.file.split('/').pop() || valueObj.file : null} 
-            onChange={(file) => onChange({ ...valueObj, file: file?.uri || '' })} 
-          />
-        </View>
-      )}
+      <View className="flex-row items-center gap-3">
+        <SegmentedButtons
+          value={valueObj?.answer || ''}
+          onValueChange={(v) => onChange({ ...valueObj, answer: v as 'YES' | 'NO' })}
+          buttons={[
+            { value: 'YES', label: 'YES' },
+            { value: 'NO', label: 'NO' },
+          ]}
+          style={{ maxWidth: 200 }}
+        />
+        {valueObj?.answer === 'YES' && (
+          <View className="flex-1 rounded-md border border-border bg-background p-2">
+            <FileUploadRow
+              label="Supporting Document"
+              fileName={valueObj.file ? valueObj.file.split('/').pop() || valueObj.file : null}
+              onChange={(file) => onChange({ ...valueObj, file: file?.uri || '' })}
+            />
+          </View>
+        )}
+      </View>
     </View>
   );
 }

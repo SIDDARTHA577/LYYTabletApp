@@ -17,21 +17,26 @@ const RESULTS_OPTIONS: DropdownOption[] = [
   { value: 'Hold', label: 'Hold', icon: 'pause-circle', color: tokens.color.warning }
 ];
 
-function ComplexFieldGroup({ 
-  label, 
-  data, 
-  onChange, 
-  showPcs = false 
-}: { 
-  label: string; 
-  data: any; 
-  onChange: (key: string, v: number) => void;
+function ComplexFieldGroup({
+  label,
+  data,
+  onChange,
+  showPcs = false,
+  showSize = false,
+}: {
+  label: string;
+  data: any;
+  onChange: (key: string, v: number | string) => void;
   showPcs?: boolean;
+  showSize?: boolean;
 }) {
   return (
     <View className="mb-4 border border-border p-4 rounded-md bg-background w-full">
       <Text className="font-bold text-textPrimary mb-4">{label}</Text>
       <View className="flex-row flex-wrap gap-4">
+        {showSize && (
+          <TextField label="Sampling Size" labelCn="抽样数量" value={data.size || ''} onChangeText={(v) => onChange('size', v)} />
+        )}
         {showPcs && (
           <NumberField label="PCs" value={data.pcs || 0} onChangeValue={(v) => onChange('pcs', v || 0)} />
         )}
@@ -48,11 +53,12 @@ export function Section11RandomSamplingAql({ data, onChange }: { data: Data; onC
     <View>
       <SectionCard title="Random Sampling - AQL" subtitle="AQL levels and results">
         <FormRow>
-          <ComplexFieldGroup 
-            label="Sampling Size / 抽样数量" 
-            data={data.sampling_size} 
-            onChange={(k, v) => onChange({ sampling_size: { ...data.sampling_size, [k]: v } })} 
+          <ComplexFieldGroup
+            label="Sampling Size / 抽样数量"
+            data={data.sampling_size}
+            onChange={(k, v) => onChange({ sampling_size: { ...data.sampling_size, [k]: v } })}
             showPcs={true}
+            showSize={true}
           />
           <ComplexFieldGroup 
             label="Accept Level / 接收水平" 

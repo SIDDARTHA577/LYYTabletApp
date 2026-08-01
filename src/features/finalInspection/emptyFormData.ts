@@ -20,11 +20,11 @@ export function createEmptyFinalInspectionData(): FinalInspectionData {
       styles: [],
     },
     upload_report_files: {
-      measurement: { file: '', is_internal: false },
-      handwritten_report: { file: '', is_internal: true },
-      preview_report: { file: '', is_internal: true },
-      inspection_file: { file: '', is_internal: true },
-      other: { file: '', is_internal: false },
+      measurement: { file: '', fileName: '', is_internal: false },
+      handwritten_report: { file: '', fileName: '', is_internal: true },
+      preview_report: { file: '', fileName: '', is_internal: true },
+      inspection_file: { file: '', fileName: '', is_internal: true },
+      other: { file: '', fileName: '', is_internal: false },
     },
     cutting_report: {
       order_qty: 0,
@@ -70,7 +70,7 @@ export function createEmptyFinalInspectionData(): FinalInspectionData {
       minor: 0,
     },
     random_sampling_aql: {
-      sampling_size: { major: 0, minor: 0, pcs: 0 },
+      sampling_size: { size: '', major: 0, minor: 0, pcs: 0 },
       accept_level: { major: 0, minor: 0 },
       reject_level: { major: 0, minor: 0 },
       rejected_pieces: { major: 0, minor: 0 },

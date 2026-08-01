@@ -17,11 +17,11 @@ export interface FinalInspectionData {
     styles: Array<{ selected: boolean; style: string; po: string; cpo: string; po_qty: number; color_name: string; prepacks: number; tech_packs: number }>;
   };
   upload_report_files: {
-    measurement: { file: string; is_internal: boolean };
-    handwritten_report: { file: string; is_internal: boolean };
-    preview_report: { file: string; is_internal: boolean };
-    inspection_file: { file: string; is_internal: boolean };
-    other: { file: string; is_internal: boolean };
+    measurement: { file: string; fileName?: string; is_internal: boolean };
+    handwritten_report: { file: string; fileName?: string; is_internal: boolean };
+    preview_report: { file: string; fileName?: string; is_internal: boolean };
+    inspection_file: { file: string; fileName?: string; is_internal: boolean };
+    other: { file: string; fileName?: string; is_internal: boolean };
   };
   cutting_report: {
     order_qty: number;
@@ -67,7 +67,7 @@ export interface FinalInspectionData {
     minor: number;
   };
   random_sampling_aql: {
-    sampling_size: { major: number; minor: number; pcs?: number };
+    sampling_size: { size?: string; major: number; minor: number; pcs?: number };
     accept_level: { major: number; minor: number };
     reject_level: { major: number; minor: number };
     rejected_pieces: { major: number; minor: number };
