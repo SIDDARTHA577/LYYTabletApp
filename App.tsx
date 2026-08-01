@@ -1,6 +1,6 @@
 import './global.css';
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -35,9 +35,19 @@ import { AuthProvider } from './src/auth/AuthProvider';
 import { LanguageProvider } from './src/i18n/LanguageContext';
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { lyyDarkTheme, lyyLightTheme } from './src/theme/paperTheme';
+import { useThemeStore } from './src/features/theme/useThemeStore';
 
 export default function App() {
-  const scheme = useColorScheme();
+  const systemScheme = useColorScheme();
+  const themePreference = useThemeStore((s) => s.preference);
+  const hydrateTheme = useThemeStore((s) => s.hydrate);
+
+  useEffect(() => {
+    hydrateTheme();
+  }, [hydrateTheme]);
+
+  // Explicit Settings choice wins; otherwise follow the OS/browser scheme.
+  const scheme = themePreference ?? systemScheme;
   const theme = scheme === 'dark' ? lyyDarkTheme : lyyLightTheme;
 
   return (

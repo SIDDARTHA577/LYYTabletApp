@@ -47,7 +47,7 @@ export function CreateMpinScreen() {
   return (
     <View style={[styles.flex, { backgroundColor: theme.colors.background }]}>
       <View style={styles.centerRow}>
-        <View style={styles.card}>
+        <View style={[styles.card, { backgroundColor: theme.colors.surface }]}>
           <Text variant="headlineSmall" style={styles.heading}>
             Create your MPIN
           </Text>
@@ -95,7 +95,7 @@ export function CreateMpinScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   centerRow: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
-  card: { width: '100%', maxWidth: 420, backgroundColor: '#fff', borderRadius: 20, padding: 32, alignItems: 'center' },
+  card: { width: '100%', maxWidth: 420, borderRadius: 20, padding: 32, alignItems: 'center' },
   heading: { fontWeight: '700', textAlign: 'center' },
   subheading: { opacity: 0.6, marginTop: 8, marginBottom: 28, textAlign: 'center' },
   hint: { marginTop: 16, opacity: 0.5, textAlign: 'center' },

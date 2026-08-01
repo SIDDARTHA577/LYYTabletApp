@@ -39,7 +39,7 @@ export function SignUpScreen() {
   if (success) {
     return (
       <View style={[styles.flex, styles.centerRow, { backgroundColor: theme.colors.background }]}>
-        <View style={styles.card}>
+        <View style={[styles.card, { backgroundColor: theme.colors.surface }]}>
           <Text variant="headlineSmall" style={styles.heading}>
             Account Created
           </Text>
@@ -65,7 +65,7 @@ export function SignUpScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView contentContainerStyle={styles.centerRow}>
-        <View style={styles.card}>
+        <View style={[styles.card, { backgroundColor: theme.colors.surface }]}>
           <View style={[styles.logo, { backgroundColor: theme.colors.primary }]}>
             <Text style={styles.logoText}>LYY</Text>
           </View>
@@ -147,7 +147,7 @@ export function SignUpScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   centerRow: { flexGrow: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
-  card: { width: '100%', maxWidth: 420, backgroundColor: '#fff', borderRadius: 20, padding: 32 },
+  card: { width: '100%', maxWidth: 420, borderRadius: 20, padding: 32 },
   logo: { width: 56, height: 56, borderRadius: 16, alignItems: 'center', justifyContent: 'center', marginBottom: 16 },
   logoText: { color: '#fff', fontWeight: '800', fontSize: 18 },
   heading: { fontWeight: '700' },

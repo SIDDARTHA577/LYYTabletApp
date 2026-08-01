@@ -29,7 +29,7 @@ export function MpinLoginScreen() {
   return (
     <View style={[styles.flex, { backgroundColor: theme.colors.background }]}>
       <View style={styles.centerRow}>
-        <View style={styles.card}>
+        <View style={[styles.card, { backgroundColor: theme.colors.surface }]}>
           <View style={[styles.logo, { backgroundColor: theme.colors.primary }]}>
             <Text style={styles.logoText}>LYY</Text>
           </View>
@@ -72,7 +72,7 @@ export function MpinLoginScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   centerRow: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
-  card: { width: '100%', maxWidth: 420, backgroundColor: '#fff', borderRadius: 20, padding: 32, alignItems: 'center' },
+  card: { width: '100%', maxWidth: 420, borderRadius: 20, padding: 32, alignItems: 'center' },
   logo: { width: 56, height: 56, borderRadius: 16, alignItems: 'center', justifyContent: 'center', marginBottom: 16 },
   logoText: { color: '#fff', fontWeight: '800', fontSize: 18 },
   heading: { fontWeight: '700', textAlign: 'center' },

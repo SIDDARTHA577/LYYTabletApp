@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View, useColorScheme } from 'react-native';
 import { Avatar, Button, SegmentedButtons, Switch, Text } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ import { useAuthStore } from '../../auth/useAuthStore';
 import { useAuth } from '../../auth/AuthProvider';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { useNetworkStatus } from '../../features/network/useNetworkStatus';
+import { useThemeStore } from '../../features/theme/useThemeStore';
 import { statusColors } from '../../theme/paperTheme';
 
 const NOTIF_PREF_KEY = 'lyy.notificationsEnabled';
@@ -19,6 +20,10 @@ export function SettingsScreen() {
   const { signOut } = useAuth();
   const { language, setLanguage, t } = useLanguage();
   const online = useNetworkStatus();
+  const systemScheme = useColorScheme();
+  const themePreference = useThemeStore((s) => s.preference);
+  const setThemePreference = useThemeStore((s) => s.setPreference);
+  const effectiveTheme = themePreference ?? systemScheme ?? 'light';
 
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
@@ -59,6 +64,17 @@ export function SettingsScreen() {
             buttons={[
               { value: 'en', label: t('english') },
               { value: 'zh', label: t('chinese') },
+            ]}
+          />
+        </SectionCard>
+
+        <SectionCard title={t('appearance')}>
+          <SegmentedButtons
+            value={effectiveTheme}
+            onValueChange={(v) => setThemePreference(v as 'light' | 'dark')}
+            buttons={[
+              { value: 'light', label: t('light'), icon: 'white-balance-sunny' },
+              { value: 'dark', label: t('dark'), icon: 'weather-night' },
             ]}
           />
         </SectionCard>
