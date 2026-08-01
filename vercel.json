@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npx expo export -p web",
+  "buildCommand": "mkdir -p node_modules/.cache/nativewind && touch node_modules/.cache/nativewind/global.css.web.css && npx expo export -p web",
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
