@@ -36,6 +36,7 @@ import { LanguageProvider } from './src/i18n/LanguageContext';
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { lyyDarkTheme, lyyLightTheme } from './src/theme/paperTheme';
 import { useThemeStore } from './src/features/theme/useThemeStore';
+import tokens from './src/theme/tokens';
 
 export default function App() {
   const systemScheme = useColorScheme();
@@ -48,7 +49,24 @@ export default function App() {
 
   // Explicit Settings choice wins; otherwise follow the OS/browser scheme.
   const scheme = themePreference ?? systemScheme;
-  const theme = scheme === 'dark' ? lyyDarkTheme : lyyLightTheme;
+  const isDark = scheme === 'dark';
+  const theme = isDark ? lyyDarkTheme : lyyLightTheme;
+
+  // Mutated synchronously (not in an effect) so every screen that reads
+  // tokens.color.x directly in a style prop — instead of a Tailwind
+  // className — sees the right values on this very render pass, with no
+  // first-paint flash of the previous theme's colors.
+  tokens.setColorScheme(isDark ? 'dark' : 'light');
+
+  // The `.dark` class on <html> is what the CSS variables behind Tailwind's
+  // bg-surface/text-textPrimary/etc. classes key off of (see global.css +
+  // tailwind.config.js) — this one's a real DOM side effect, so it stays in
+  // an effect.
+  useEffect(() => {
+    if (Platform.OS === 'web' && typeof document !== 'undefined') {
+      document.documentElement.classList.toggle('dark', isDark);
+    }
+  }, [isDark]);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

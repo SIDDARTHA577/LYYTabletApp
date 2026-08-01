@@ -7,3 +7,42 @@ svg {
   display: inline-block !important;
   vertical-align: middle !important;
 }
+
+/* Design-token color variables (RGB triplets, no commas, for Tailwind's
+   `rgb(var(--x) / <alpha-value>)` pattern — see tailwind.config.js). Values
+   mirror src/theme/tokens.js's lightColors/darkColors and
+   src/theme/paperTheme.ts's lyyDarkTheme so Tailwind classes, react-native-
+   paper, and direct tokens.color.x reads never drift from each other. The
+   `.dark` class is toggled on <html> by App.tsx whenever the active theme
+   changes (see src/features/theme/useThemeStore.ts). */
+:root {
+  --color-primary: 15 23 42;
+  --color-primary-hover: 30 41 59;
+  --color-primary-light: 241 245 249;
+  --color-success: 16 185 129;
+  --color-warning: 245 158 11;
+  --color-danger: 239 68 68;
+  --color-info: 59 130 246;
+  --color-background: 248 250 252;
+  --color-surface: 255 255 255;
+  --color-border: 226 232 240;
+  --color-text-primary: 15 23 42;
+  --color-text-secondary: 100 116 139;
+  --color-text-muted: 148 163 184;
+}
+
+.dark {
+  --color-primary: 147 197 253;
+  --color-primary-hover: 96 165 250;
+  --color-primary-light: 31 41 55;
+  --color-success: 52 211 153;
+  --color-warning: 251 191 36;
+  --color-danger: 248 113 113;
+  --color-info: 96 165 250;
+  --color-background: 17 24 39;
+  --color-surface: 31 41 55;
+  --color-border: 55 65 81;
+  --color-text-primary: 241 245 249;
+  --color-text-secondary: 148 163 184;
+  --color-text-muted: 100 116 139;
+}

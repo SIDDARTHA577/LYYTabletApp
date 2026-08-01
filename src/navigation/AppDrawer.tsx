@@ -22,6 +22,7 @@ import { useActivityStore } from '../features/activity/useActivityStore';
 import { useFabricFormNavStore } from '../features/fabricInspection/useFabricFormNavStore';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useDrawerStore } from '../features/ui/useDrawerStore';
+import { useThemeStore } from '../features/theme/useThemeStore';
 import tokens from '../theme/tokens';
 
 const Drawer = createDrawerNavigator();
@@ -154,6 +155,11 @@ function CustomDrawerContent(props: any) {
   const completedSections = useFabricFormNavStore((s) => s.completedSections);
 
   const { isCollapsed, toggleCollapse } = useDrawerStore();
+  // Not read directly — this is the persistent drawer chrome (always
+  // mounted, unlike screens which remount/refocus on navigation), so it
+  // needs its own subscription to re-render when tokens.color.* is mutated
+  // by App.tsx's theme effect (see src/theme/tokens.js).
+  useThemeStore((s) => s.preference);
 
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1, backgroundColor: tokens.color.background }}>
