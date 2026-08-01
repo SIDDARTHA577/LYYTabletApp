@@ -32,6 +32,11 @@ const OVERALL_STATUS_OPTIONS: DropdownOption[] = [
   { value: 'N/A', label: 'N/A', icon: 'minus-circle-outline', color: tokens.color.textSecondary }
 ];
 
+const PHOTO_TYPE_OPTIONS = [
+  'SILICA GEL', 'BULK IN POLYBAG', 'SIZE CROWN', 'CARTON DROP', 'HANGER CODE',
+  'CARTON MARKING', 'BULK IN CARTON', 'CARTON PLY',
+].map(v => ({ label: v, value: v }));
+
 export function Section5PackingShippingMark({ data, onChange }: { data: Data; onChange: (next: Partial<Data>) => void }) {
   const addPhoto = () => onChange({ photos: [...data.photos, { type: '', file: '' }] });
   const updatePhoto = (idx: number, field: string, value: any) => {
@@ -71,7 +76,7 @@ export function Section5PackingShippingMark({ data, onChange }: { data: Data; on
           <NumberField label="Carton Qty" value={data.packaging.carton_qty} onChangeValue={(v) => onChange({ packaging: { ...data.packaging, carton_qty: v || 0 } })} />
           <NumberField label="Balance Qty" value={data.packaging.balance_qty} onChangeValue={(v) => onChange({ packaging: { ...data.packaging, balance_qty: v || 0 } })} />
           <NumberField label="Balance Percent" value={data.packaging.balance_percent} onChangeValue={(v) => onChange({ packaging: { ...data.packaging, balance_percent: v || 0 } })} />
-          <DropdownField label="Status" value={data.packaging.status} options={APPROVED_REJECTED_OPTIONS} onChangeValue={(v) => onChange({ packaging: { ...data.packaging, status: v } })} />
+          <DropdownField label="Packaging Status" value={data.packaging.status} options={APPROVED_REJECTED_OPTIONS} onChangeValue={(v) => onChange({ packaging: { ...data.packaging, status: v } })} />
           
           <NumberField label="Pre-Pack / Individually Bagged" value={data.pre_pack.value} onChangeValue={(v) => onChange({ pre_pack: { value: v || 0 } })} />
           <DropdownField label="Packing Method" value={data.packing_method} options={[{label: 'Individually Bagged', value: 'Individually Bagged'}, {label: 'Prepack', value: 'Prepack'}, {label: 'Multi-Pieces In One Polybag', value: 'Multi-Pieces In One Polybag'}]} onChangeValue={(v) => onChange({ packing_method: v })} />
@@ -89,7 +94,7 @@ export function Section5PackingShippingMark({ data, onChange }: { data: Data; on
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16 }}>
           {data.photos.map((item, idx) => (
             <View key={idx} className="mb-4 border border-border p-4 rounded-md bg-background w-[100%] max-w-[400px]">
-              <TextField label="Photo/Zip Type" value={item.type} onChangeText={(v) => updatePhoto(idx, 'type', v)} width="100%" />
+              <DropdownField label="Photo/Zip Type" value={item.type} options={PHOTO_TYPE_OPTIONS} onChangeValue={(v) => updatePhoto(idx, 'type', v)} width="100%" />
               <View className="mt-4">
                 <FileUploadRow 
                   label={`Upload ${idx + 1}`} 

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
-import { Button, IconButton, Switch, Modal, Portal } from 'react-native-paper';
+import { Button, IconButton, Switch } from 'react-native-paper';
 import { SectionCard } from '../../../components/SectionCard';
 import { FormRow } from '../../../components/form/FormRow';
 import { TextField } from '../../../components/form/TextField';
@@ -40,12 +40,8 @@ const IMPROVEMENT_MEASURES_EN = [
   'Enhance Training', 'Check Machine', 'Change Raw Material'
 ].map(t => ({ label: t, value: t }));
 
-export function Section8WorkmanshipDefects({ data, onChange, productSecondaryCategory }: { data: Data; onChange: (next: Partial<Data>) => void; productSecondaryCategory?: string }) {
+export function Section8WorkmanshipDefects({ data, onChange }: { data: Data; onChange: (next: Partial<Data>) => void }) {
   const { language } = useLanguage();
-  const [positionModalVisible, setPositionModalVisible] = useState(false);
-  const [newPositionCn, setNewPositionCn] = useState('');
-  const [newPositionEn, setNewPositionEn] = useState('');
-  const [currentDefectIndex, setCurrentDefectIndex] = useState<number | null>(null);
 
   const addDefect = (isCustom: boolean = false) => {
     onChange({ defects: [...data.defects, { type: '', position: '', content: '', content_cn: '', content_en: '', desc_cn: '', desc_en: '', corrective_cn: '', corrective_en: '', improvement_cn: '', improvement_en: '', pre_alert: false, is_custom: isCustom }] });
@@ -61,20 +57,6 @@ export function Section8WorkmanshipDefects({ data, onChange, productSecondaryCat
     const newDefects = [...data.defects];
     newDefects.splice(index, 1);
     onChange({ defects: newDefects });
-  };
-
-  const openPositionModal = (index: number) => {
-    setCurrentDefectIndex(index);
-    setNewPositionCn('');
-    setNewPositionEn('');
-    setPositionModalVisible(true);
-  };
-
-  const saveNewPosition = () => {
-    if (currentDefectIndex !== null) {
-      updateDefect(currentDefectIndex, 'position', `${newPositionEn} / ${newPositionCn}`);
-    }
-    setPositionModalVisible(false);
   };
 
   return (
@@ -99,13 +81,7 @@ export function Section8WorkmanshipDefects({ data, onChange, productSecondaryCat
             </View>
             <FormRow>
               <DropdownField label="Type" labelCn="缺陷类型" value={defect.type} options={DEFECT_TYPES} onChangeValue={(v) => updateDefect(idx, 'type', v)} width="100%" />
-              
-              <View className="w-full flex-row items-end gap-2 mb-4">
-                <View className="flex-1">
-                  <DropdownField label="Position" labelCn="缺陷位置" value={defect.position} options={DEFECT_POSITIONS} onChangeValue={(v) => updateDefect(idx, 'position', v)} width="100%" />
-                </View>
-                <Button mode="outlined" onPress={() => openPositionModal(idx)} style={{ height: 44, justifyContent: 'center' }}>Add Position</Button>
-              </View>
+              <DropdownField label="Position" labelCn="缺陷位置" value={defect.position} options={DEFECT_POSITIONS} onChangeValue={(v) => updateDefect(idx, 'position', v)} width="100%" />
 
               {defect.is_custom ? (
                 <>
@@ -134,23 +110,6 @@ export function Section8WorkmanshipDefects({ data, onChange, productSecondaryCat
           <Button mode="outlined" icon="plus" onPress={() => addDefect(true)} style={{ borderColor: tokens.color.primary, borderRadius: tokens.radius.md }}>{language === 'en' ? 'Add Custom Defect' : '添加自定义缺陷'}</Button>
         </View>
       </SectionCard>
-
-      <Portal>
-        <Modal visible={positionModalVisible} onDismiss={() => setPositionModalVisible(false)} contentContainerStyle={{ backgroundColor: tokens.color.surface, padding: 20, margin: 20, borderRadius: tokens.radius.md }}>
-          <Text className="text-h3 font-bold mb-4">Add Defect Position</Text>
-          <TextField label="Second Level Product Type" value={productSecondaryCategory || ''} editable={false} onChangeText={() => {}} width="100%" />
-          <View className="mt-4">
-            <TextField label="Defect Position CN" value={newPositionCn} onChangeText={setNewPositionCn} width="100%" />
-          </View>
-          <View className="mt-4 mb-6">
-            <TextField label="Defect Position EN" value={newPositionEn} onChangeText={setNewPositionEn} width="100%" />
-          </View>
-          <View className="flex-row justify-end gap-2">
-            <Button mode="text" onPress={() => setPositionModalVisible(false)}>Cancel</Button>
-            <Button mode="contained" onPress={saveNewPosition}>Save</Button>
-          </View>
-        </Modal>
-      </Portal>
     </View>
   );
 }

@@ -175,7 +175,7 @@ export function FinalInspectionFormScreen() {
       {activeSection === 'packing_shipping_mark' && <Section5PackingShippingMark data={data.packing_shipping_mark} onChange={(p) => updateSection('packing_shipping_mark', p)} />}
       {activeSection === 'accessories' && <Section6Accessories data={data.accessories} onChange={(p) => updateSection('accessories', p)} />}
       {activeSection === 'check_point_list' && <Section7CheckPointList data={data.check_point_list} onChange={(p) => updateSection('check_point_list', p)} />}
-      {activeSection === 'workmanship_defects' && <Section8WorkmanshipDefects data={data.workmanship_defects} onChange={(p) => updateSection('workmanship_defects', p)} productSecondaryCategory={data.insp_time_po_info.product_secondary_category} />}
+      {activeSection === 'workmanship_defects' && <Section8WorkmanshipDefects data={data.workmanship_defects} onChange={(p) => updateSection('workmanship_defects', p)} />}
       {activeSection === 'production_safety_mgmt' && <Section9ProductionSafetyMgmt data={data.production_safety_mgmt} onChange={(p) => updateSection('production_safety_mgmt', p)} />}
       {activeSection === 'random_sampling_meas' && <Section10RandomSamplingMeas data={data.random_sampling_meas} onChange={(p) => updateSection('random_sampling_meas', p)} />}
       {activeSection === 'random_sampling_aql' && <Section11RandomSamplingAql data={data.random_sampling_aql} onChange={(p) => updateSection('random_sampling_aql', p)} />}
