@@ -1,13 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Button, SegmentedButtons, TextInput } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 import { SectionCard } from '../../../components/SectionCard';
 import { PhotoSlot } from '../../../components/form/PhotoSlot';
+import { DropdownField } from '../../../components/form/DropdownField';
 import type { InlineInspectionData } from '../../../features/inlineInspection/types';
 import tokens from '../../../theme/tokens';
 import { useLanguage } from '../../../i18n/LanguageContext';
 
 type Data = InlineInspectionData['check_point_list'];
+
+const RESULT_OPTIONS = ['Select', 'Ok', 'Not conform', 'DDP', 'No'].map((v) => ({ label: v, value: v }));
 
 export function Section9CheckPointList({ data, onChange }: { data: Data; onChange: (next: Data) => void }) {
   const { language } = useLanguage();
@@ -47,16 +50,7 @@ export function Section9CheckPointList({ data, onChange }: { data: Data; onChang
               <Text className="font-bold text-textPrimary">{item.point}</Text>
             </View>
             <View className="w-1/3 px-2">
-              <SegmentedButtons
-                value={item.result}
-                onValueChange={(v) => updateItem(idx, 'result', v)}
-                buttons={[
-                  { value: 'OK', label: 'OK' },
-                  { value: 'Not OK', label: 'Not OK' },
-                  { value: 'N/A', label: 'N/A' },
-                ]}
-                density="small"
-              />
+              <DropdownField label="Result" value={item.result} options={RESULT_OPTIONS} onChangeValue={(v) => updateItem(idx, 'result', v)} width="100%" />
             </View>
             <View className="w-1/4 px-2">
               <TextInput

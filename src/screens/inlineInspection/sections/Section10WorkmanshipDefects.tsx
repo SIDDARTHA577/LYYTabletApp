@@ -15,8 +15,14 @@ const TYPE_OPTIONS = [
 ].map(t => ({ label: t, value: t }));
 
 const INITIAL_POSITION_OPTIONS = [
-  'HOOK & EYES', 'BACK TOP EDGE', 'SHOULDER STRAP', 'WIRE', 'SLIDER', 'ARMHOLE', 'UPPER CUP', 'LOWER CUP', 'FRONT LOOP', 'CUP NECKLINE', 'CENTER FRONT', 'SIDE WING', 'BONING', 'BACK WING', 'UNDERBUST', 'BOTTOM BAND', 'WIRE CASING', 'PAD', 'DART', 'SCALLOP'
+  'SLEEVE', 'BUTTON', 'UNDER PLACKET', 'SIDESEAM', 'UNDER SLEEVE SEAM', 'PLACKET', 'FRONT LENGTH', 'BUTTONHOLE',
+  'SMALL SHOULDER', 'STANDCOLLAR', 'SLEEVE CAP/SLEEVEHEAD', 'BACKPART', 'SIDE SLIT', 'HEM/BOTTOM', 'SLEEVE OPENING',
+  'ARMHOLE', 'TOPCOLLAR', 'BACK LENGTH', 'ACROSS SHOULDER', 'ACROSS FRONT',
 ].map(p => ({ label: p, value: p }));
+
+const DESC_EN_OPTIONS = [
+  'GLAZING', 'CRUSHING', 'STAIN', 'PEN MARK', 'CHALK MARK', 'GLUE MARKS', 'STICKER MARKS', 'DYE DEFECT', 'PRINT DEFECT',
+].map(d => ({ label: d, value: d }));
 
 const IMPROVEMENT_MEASURES_CN = [
   { label: '加强培训', value: '加强培训' },
@@ -101,8 +107,7 @@ export function Section10WorkmanshipDefects({ data, onChange }: { data: Data; on
                 </>
               )}
               
-              <TextField label="Desc CN" labelCn="缺陷描述(中)" value={defect.desc_cn} onChangeText={(v) => updateDefect(idx, 'desc_cn', v)} />
-              <TextField label="Desc EN" labelCn="缺陷描述(英)" value={defect.desc_en} onChangeText={(v) => updateDefect(idx, 'desc_en', v)} />
+              <DropdownField label="Desc EN" value={defect.desc_en} options={DESC_EN_OPTIONS} onChangeValue={(v) => updateDefect(idx, 'desc_en', v)} />
               <DropdownField label="Improvement Measures CN" value={defect.corrective_cn} options={IMPROVEMENT_MEASURES_CN} onChangeValue={(v) => updateDefect(idx, 'corrective_cn', v)} />
               <DropdownField label="Improvement Measures EN" value={defect.corrective_en} options={IMPROVEMENT_MEASURES_EN} onChangeValue={(v) => updateDefect(idx, 'corrective_en', v)} />
               
@@ -122,7 +127,7 @@ export function Section10WorkmanshipDefects({ data, onChange }: { data: Data; on
       </SectionCard>
 
       <Portal>
-        <Modal visible={positionModalVisible} onDismiss={() => setPositionModalVisible(false)} contentContainerStyle={{ backgroundColor: 'white', padding: 20, margin: 20, borderRadius: 8 }}>
+        <Modal visible={positionModalVisible} onDismiss={() => setPositionModalVisible(false)} contentContainerStyle={{ backgroundColor: tokens.color.surface, padding: 20, margin: 20, borderRadius: 8 }}>
           <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 16 }}>{language === 'en' ? 'Add Defect Position' : '添加缺陷位置'}</Text>
           <PaperTextInput mode="outlined" label={language === 'en' ? 'Second Level Product Type' : '二级产品类别'} value="Auto-filled" disabled style={{ marginBottom: 12 }} />
           <PaperTextInput mode="outlined" label={language === 'en' ? 'Defect Position CN' : '缺陷位置(中)'} value={newPosCn} onChangeText={setNewPosCn} style={{ marginBottom: 12 }} />

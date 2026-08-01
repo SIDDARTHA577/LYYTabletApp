@@ -91,6 +91,7 @@ export function Section1InspTimePoInfo({ data, onChange }: { data: Data; onChang
             <NumberField label="PO QTY" value={style.po_qty} onChangeValue={(v) => updateStyle(idx, 'po_qty', v)} width="45%" />
             <TextField label="Color Name" value={style.color_name} onChangeText={(v) => updateStyle(idx, 'color_name', v)} width="45%" />
             <NumberField label="Prepacks" value={style.prepacks} onChangeValue={(v) => updateStyle(idx, 'prepacks', v)} width="45%" />
+            <NumberField label="Tech Packs" value={style.tech_packs} onChangeValue={(v) => updateStyle(idx, 'tech_packs', v)} width="45%" />
           </View>
         ))}
         <Button mode="outlined" icon="plus" onPress={addStyle} style={{ marginTop: 8, borderColor: tokens.color.primary, borderRadius: tokens.radius.md }}>{language === 'en' ? 'Add PO' : '添加订单'}</Button>

@@ -13,10 +13,16 @@ type Data = InlineInspectionData['production_status_photos'];
 import { DropdownOption } from '../../../components/form/DropdownField';
 
 const STATUS_OPTIONS: DropdownOption[] = [
-  'SEWING WORKSHOP', 'SEMI-FINISHED PRODUCT', 'HAND-OVER LIST', 'SUB-CONTRACTION LIST',
-  'BULK UNDER BUTTON ATTACHING', 'BULK AWAIT TRIMMING', 'BULK UNDER PRESSING', 'BULK AWAIT PACKING',
-  'A WORK IN PROGRESS', 'BULK IN PACKAGE', 'BULK UNDER TICKERING', 'BULK AFTER TRIMMING & PRESSING',
-  'BULK UNDER TRIMMING', 'UNPACKED BULK', 'CUTTING DEPARTMENT', 'BULK AFTER TRIMMING', 'CUTTING PIECE'
+  'Inspect Site', 'Fabric Weight Check', 'PP Sample', 'Summary', 'Shipment Sample',
+  'Main Materials Situation', 'Sewing Workshop', 'Broken Needle Inspection', 'Defect And Corrective Action',
+  'Inspection Of Special Cutting', 'Size Check', 'Check EMB Size', 'Top Main Label Placement Check',
+  'Cutting Daily Inspection', 'Inline Checking', 'Pressing Area', 'Product Safe Management',
+  'Embroidering/Printing Position Check', 'Pants Main Label Placement Check', 'Production Line Daily Inspection',
+  'Needle Inspection', 'Comparison Between Approved Sample', 'Care Label Check', 'Full Size Bulk Trim Card',
+  'Bulk Fitting Photo', 'Carton Mark Checking', 'Bulks In Carton And Carton Ply', 'Poly Bag Warning And Desiccant',
+  'Checking & Packing Area', 'Carton Marking With Sticker Check', 'Packing And Ratio Inspection',
+  'Hanger And Hanger Packing Check', 'Cartons', 'Carton Dimension/Weight Check',
+  'Price Ticket/Hangtag and Placement', 'Summary Of Major Issues',
 ].map(opt => ({ value: opt, label: opt, icon: 'camera-outline' }));
 
 export function Section7ProductionStatusPhotos({ data, onChange }: { data: Data; onChange: (next: Data) => void }) {

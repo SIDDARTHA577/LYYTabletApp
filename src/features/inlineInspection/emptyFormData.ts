@@ -20,11 +20,11 @@ export function createEmptyInlineInspectionData(): InlineInspectionData {
       styles: [],
     },
     upload_report_files: {
-      measurement: { file: '', is_internal: false },
-      handwritten_report: { file: '', is_internal: true },
-      preview_report: { file: '', is_internal: true },
-      inspection_file: { file: '', is_internal: true },
-      other: { file: '', is_internal: false },
+      measurement: { file: '', fileName: '', is_internal: false },
+      handwritten_report: { file: '', fileName: '', is_internal: true },
+      preview_report: { file: '', fileName: '', is_internal: true },
+      inspection_file: { file: '', fileName: '', is_internal: true },
+      other: { file: '', fileName: '', is_internal: false },
     },
     pp_sample: {
       date: '',
@@ -61,6 +61,11 @@ export function createEmptyInlineInspectionData(): InlineInspectionData {
       major: 0,
       minor: 0,
       defects: [],
+    },
+    production_safety_mgmt: {
+      needle_control: {},
+      sharp_object_management: {},
+      metal_detection_management: {},
     },
     random_sampling_meas: {
       qty: 0,

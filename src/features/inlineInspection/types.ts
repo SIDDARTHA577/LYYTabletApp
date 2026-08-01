@@ -17,11 +17,11 @@ export interface InlineInspectionData {
     styles: Array<{ selected: boolean; style: string; po: string; cpo: string; po_qty: number; color_name: string; prepacks: number; tech_packs: number }>;
   };
   upload_report_files: {
-    measurement: { file: string; is_internal: boolean };
-    handwritten_report: { file: string; is_internal: boolean };
-    preview_report: { file: string; is_internal: boolean };
-    inspection_file: { file: string; is_internal: boolean };
-    other: { file: string; is_internal: boolean };
+    measurement: { file: string; fileName?: string; is_internal: boolean };
+    handwritten_report: { file: string; fileName?: string; is_internal: boolean };
+    preview_report: { file: string; fileName?: string; is_internal: boolean };
+    inspection_file: { file: string; fileName?: string; is_internal: boolean };
+    other: { file: string; fileName?: string; is_internal: boolean };
   };
   pp_sample: {
     date: string;
@@ -58,6 +58,11 @@ export interface InlineInspectionData {
     major: number;
     minor: number;
     defects: Array<{ type: string; position: string; content_cn: string; content_en: string; desc_cn: string; desc_en: string; corrective_cn: string; corrective_en: string; pre_alert: boolean; is_custom?: boolean }>;
+  };
+  production_safety_mgmt: {
+    needle_control: Record<string, any>;
+    sharp_object_management: Record<string, any>;
+    metal_detection_management: Record<string, any>;
   };
   random_sampling_meas: {
     qty: number;

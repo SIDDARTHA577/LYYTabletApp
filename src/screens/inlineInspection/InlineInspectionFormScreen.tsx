@@ -22,6 +22,7 @@ import { Section7ProductionStatusPhotos } from './sections/Section7ProductionSta
 import { Section8PrePackaged } from './sections/Section8PrePackaged';
 import { Section9CheckPointList } from './sections/Section9CheckPointList';
 import { Section10WorkmanshipDefects } from './sections/Section10WorkmanshipDefects';
+import { Section11ProductionSafetyMgmt } from './sections/Section11ProductionSafetyMgmt';
 import { Section11RandomSamplingMeas } from './sections/Section11RandomSamplingMeas';
 import { Section12PhotoJournal } from './sections/Section12PhotoJournal';
 import { Section13KeepSample } from './sections/Section13KeepSample';
@@ -39,6 +40,7 @@ const SECTIONS = [
   { key: 'pre_packaged', title: 'Pre-Packaged', icon: 'package-variant' },
   { key: 'check_point_list', title: 'Check Point List', icon: 'format-list-checks' },
   { key: 'workmanship_defects', title: 'Workmanship Defects', icon: 'alert-circle-outline' },
+  { key: 'production_safety_mgmt', title: 'Production Safety Mgmt', icon: 'shield-check-outline' },
   { key: 'random_sampling_meas', title: 'Random Sampling - Meas', icon: 'tape-measure' },
   { key: 'photo_journal', title: 'Photo Journal', icon: 'image-multiple-outline' },
   { key: 'keep_sample', title: 'Keep Sample', icon: 'archive-outline' },
@@ -178,6 +180,7 @@ export function InlineInspectionFormScreen() {
       {activeSection === 'pre_packaged' && <Section8PrePackaged data={data.pre_packaged} onChange={(p) => updateSection('pre_packaged', p)} />}
       {activeSection === 'check_point_list' && <Section9CheckPointList data={data.check_point_list} onChange={(p) => updateSection('check_point_list', p)} />}
       {activeSection === 'workmanship_defects' && <Section10WorkmanshipDefects data={data.workmanship_defects} onChange={(p) => updateSection('workmanship_defects', p)} />}
+      {activeSection === 'production_safety_mgmt' && <Section11ProductionSafetyMgmt data={data.production_safety_mgmt} onChange={(p) => updateSection('production_safety_mgmt', p)} />}
       {activeSection === 'random_sampling_meas' && <Section11RandomSamplingMeas data={data.random_sampling_meas} onChange={(p) => updateSection('random_sampling_meas', p)} />}
       {activeSection === 'photo_journal' && <Section12PhotoJournal data={data.photo_journal} onChange={(p) => updateSection('photo_journal', p)} />}
       {activeSection === 'keep_sample' && <Section13KeepSample data={data.keep_sample} onChange={(p) => updateSection('keep_sample', p)} />}
