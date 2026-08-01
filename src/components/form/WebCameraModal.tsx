@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
   camera: { flex: 1, width: '100%' },
   text: { textAlign: 'center', marginBottom: 20, color: 'black' },
   buttonContainer: { flex: 1, backgroundColor: 'transparent', flexDirection: 'column' },
-  closeBtn: { position: 'absolute', top: 10, right: 10 },
-  captureBtn: { position: 'absolute', bottom: 40, alignSelf: 'center' },
+  closeBtn: { position: 'absolute', top: 10, right: 10, margin: 0 },
+  captureBtn: { position: 'absolute', bottom: 40, alignSelf: 'center', margin: 0 },
 });

@@ -75,7 +75,7 @@ export function PhotoSlot({ label, uri, onChange }: { label: string; uri: string
         <IconButton
           icon="close-circle"
           size={18}
-          style={{ position: 'absolute', top: -8, right: -8 }}
+          style={{ position: 'absolute', top: -8, right: -8, margin: 0 }}
           onPress={() => onChange('')}
         />
       )}
