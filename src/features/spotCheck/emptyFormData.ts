@@ -1,0 +1,66 @@
+import type { SpotCheckData } from './types';
+
+export function createEmptySpotCheckData(): SpotCheckData {
+  return {
+    style_po_info: {
+      style: '',
+      po: '',
+      cpo: '',
+      brand: '',
+      colors: '',
+      factory: '',
+      description: '',
+    },
+    spot_check_details: {
+      date: '',
+      time: '',
+      inspector: '',
+      factory_type: '',
+      area_stage: '',
+      trigger_reason: '',
+      prior_report_ref: '',
+    },
+    document_audit: {
+      tech_pack: '',
+      po: '',
+      pps_sample: '',
+      fabric: '',
+      accessory: '',
+      trim_card: '',
+      packing: '',
+      size_spec: '',
+    },
+    in_process_checks: {},
+    aql_spot_inspection: {
+      pcs_inspected: 0,
+      aql_level: '',
+      total_majors: 0,
+      total_minors: 0,
+      defective_percent: '',
+      aql_result: '',
+      findings: [],
+    },
+    bulk_conformity: {},
+    bulk_conformity_spec_sheet: null,
+    photo_journal: {
+      sewing_line: '',
+      defect: '',
+      labelling: '',
+      packing: '',
+      colour_shading: '',
+      measurement: '',
+    },
+    conclusion_cap: {
+      findings_summary: '',
+      meeting_cap: '',
+      overall_result: '',
+      escalation: '',
+      system_report_issued: false,
+      notify: '',
+      inspector_signature: '',
+      factory_signature: '',
+      date_inspector: '',
+      date_factory: '',
+    },
+  };
+}

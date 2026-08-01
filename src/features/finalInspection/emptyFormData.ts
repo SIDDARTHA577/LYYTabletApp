@@ -1,0 +1,86 @@
+import type { FinalInspectionData } from './types';
+
+export function createEmptyFinalInspectionData(): FinalInspectionData {
+  return {
+    insp_time_po_info: {
+      factory: '',
+      type: 'Final',
+      material: '',
+      product_category: '',
+      product_secondary_category: '',
+      vendor_qc: '',
+      reporting_user: [],
+      second_reporting: [],
+      inspector: '',
+      color_count: 0,
+      inspection_date: '',
+      start_time: '',
+      end_time: '',
+      report_comments: '',
+      styles: [],
+    },
+    upload_report_files: {
+      measurement: { file: '', is_internal: false },
+      handwritten_report: { file: '', is_internal: true },
+      preview_report: { file: '', is_internal: true },
+      inspection_file: { file: '', is_internal: true },
+      other: { file: '', is_internal: false },
+    },
+    cutting_report: {
+      order_qty: 0,
+      consignment_qty: 0,
+      cutting_qty_fty: 0,
+      aql_level: '',
+      sampling_carton: '',
+      sample_size_level: '',
+      aql_standard: '',
+      documents: [],
+    },
+    pp_sample: {
+      date: '',
+      comment_cn: '',
+      comment_en: '',
+      photos: [],
+    },
+    packing_shipping_mark: {
+      weight: { value: 0, unit: 'KG', status: '', comment: '' },
+      measurement: { value: 0, unit: 'CM', status: '', comment: '' },
+      packaging: { packed_garments: 0, packed_percent: 0, carton_qty: 0, balance_qty: 0, balance_percent: 0, status: '' },
+      pre_pack: { value: 0 },
+      packing_method: '',
+      overall: { status: '', comment: '' },
+      photos: [],
+    },
+    accessories: {},
+    check_point_list: [],
+    workmanship_defects: {
+      critical: 0,
+      major: 0,
+      minor: 0,
+      defects: [],
+    },
+    production_safety_mgmt: {
+      needle_control: {},
+      sharp_object_management: {},
+      metal_detection_management: {},
+    },
+    random_sampling_meas: {
+      qty: 0,
+      major: 0,
+      minor: 0,
+    },
+    random_sampling_aql: {
+      sampling_size: { major: 0, minor: 0, pcs: 0 },
+      accept_level: { major: 0, minor: 0 },
+      reject_level: { major: 0, minor: 0 },
+      rejected_pieces: { major: 0, minor: 0 },
+      results: '',
+      comment: '',
+    },
+    photo_journal: [],
+    keep_sample: {
+      quantity: '',
+      barcode: '',
+    },
+  };
+}

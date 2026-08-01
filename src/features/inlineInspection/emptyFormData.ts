@@ -1,0 +1,76 @@
+import type { InlineInspectionData } from './types';
+
+export function createEmptyInlineInspectionData(): InlineInspectionData {
+  return {
+    insp_time_po_info: {
+      factory: '',
+      type: 'Inline',
+      material: '',
+      product_category: '',
+      product_secondary_category: '',
+      vendor_qc: '',
+      reporting_user: [],
+      second_reporting: [],
+      inspector: [],
+      color_count: 0,
+      inspection_date: '',
+      start_time: '',
+      end_time: '',
+      report_comments: '',
+      styles: [],
+    },
+    upload_report_files: {
+      measurement: { file: '', is_internal: false },
+      handwritten_report: { file: '', is_internal: true },
+      preview_report: { file: '', is_internal: true },
+      inspection_file: { file: '', is_internal: true },
+      other: { file: '', is_internal: false },
+    },
+    pp_sample: {
+      date: '',
+      comment_cn: '',
+      comment_en: '',
+      photos: [],
+    },
+    cutting_report_document: {
+      documents: [],
+      lab_tests: [],
+    },
+    accessories: {},
+    production_status: {
+      order: 0,
+      cutting: 0,
+      sampling_size: 0,
+      in_house_subcontracted: 'In House',
+      emb_out: 0,
+      emb_back: 0,
+      cutting_pieces: 0,
+      semi_finished: 0,
+      trimming: 0,
+      final_pressing: 0,
+      packing: 0,
+      finished: 0,
+      remark_cn: '',
+      remark_en: '',
+    },
+    production_status_photos: [],
+    pre_packaged: [],
+    check_point_list: [],
+    workmanship_defects: {
+      critical: 0,
+      major: 0,
+      minor: 0,
+      defects: [],
+    },
+    random_sampling_meas: {
+      qty: 0,
+      major: 0,
+      minor: 0,
+    },
+    photo_journal: [],
+    keep_sample: {
+      quantity: '',
+      barcode: '',
+    },
+  };
+}

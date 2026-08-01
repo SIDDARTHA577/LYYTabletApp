@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "LYY Inspector",
+    "slug": "lyy-inspector-app",
+    "version": "1.0.0",
+    "orientation": "landscape",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#4A5FE0"
+    },
+    "android": {
+      "package": "com.lyyquality.inspector",
+      "adaptiveIcon": {
+        "backgroundColor": "#4A5FE0"
+      }
+    },
+    "plugins": [
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "LYY Inspector uses the camera to scan roll and lot label barcodes."
+        }
+      ]
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+svg {
+  overflow: visible !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
