@@ -59,17 +59,10 @@ function delay(ms = 400) {
 
 function buildUser(email: string): LoginResponse['user'] {
   const trimmed = email.trim();
-  const localPart = trimmed.split('@')[0] || 'inspector';
-  const name = localPart
-    .replace(/[._-]+/g, ' ')
-    .split(' ')
-    .filter(Boolean)
-    .map((w) => w[0].toUpperCase() + w.slice(1))
-    .join(' ') || 'Inspector Demo';
 
   return {
     id: 'mock-user-1',
-    name,
+    name: 'Siddartha',
     employeeId: 'LYY-INS-0002',
     email: trimmed || 'inspector@lyy-quality.com',
     role: 'inspector',
