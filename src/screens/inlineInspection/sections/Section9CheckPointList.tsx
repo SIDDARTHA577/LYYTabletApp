@@ -1,16 +1,15 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { TextInput } from 'react-native-paper';
 import { SectionCard } from '../../../components/SectionCard';
 import { PhotoSlot } from '../../../components/form/PhotoSlot';
 import { DropdownField } from '../../../components/form/DropdownField';
+import { TextField } from '../../../components/form/TextField';
 import type { InlineInspectionData } from '../../../features/inlineInspection/types';
-import tokens from '../../../theme/tokens';
 import { useLanguage } from '../../../i18n/LanguageContext';
 
 type Data = InlineInspectionData['check_point_list'];
 
-const RESULT_OPTIONS = ['Select', 'Ok', 'Not conform', 'DDP', 'No'].map((v) => ({ label: v, value: v }));
+const RESULT_OPTIONS = ['Ok', 'Not conform', 'DDP', 'No'].map((v) => ({ label: v, value: v }));
 
 export function Section9CheckPointList({ data, onChange }: { data: Data; onChange: (next: Data) => void }) {
   const { language } = useLanguage();
@@ -31,7 +30,7 @@ export function Section9CheckPointList({ data, onChange }: { data: Data; onChang
   // Initialize with default points if empty
   React.useEffect(() => {
     if (safeData.length === 0) {
-      onChange(CHECK_POINTS.map(point => ({ point, result: '', desc: '', photo: '' })));
+      onChange(CHECK_POINTS.map(point => ({ point, result: '', desc: '', remark_cn: '', remark_en: '', photo: '' })));
     }
   }, [safeData.length]);
 
@@ -45,23 +44,18 @@ export function Section9CheckPointList({ data, onChange }: { data: Data; onChang
     <View>
       <SectionCard title={language === 'en' ? 'Check Point List' : '检查点列表'} subtitle={language === 'en' ? 'Inspection check points' : '检验检查点'}>
         {safeData.map((item, idx) => (
-          <View key={idx} className="mb-4 border border-border p-4 rounded-md bg-background flex-row items-center justify-between">
-            <View className="w-1/4 pr-2">
-              <Text className="font-bold text-textPrimary">{item.point}</Text>
-            </View>
-            <View className="w-1/3 px-2">
-              <DropdownField label="Result" value={item.result} options={RESULT_OPTIONS} onChangeValue={(v) => updateItem(idx, 'result', v)} width="100%" />
-            </View>
-            <View className="w-1/4 px-2">
-              <TextInput
-                mode="outlined"
-                value={item.desc || ''}
-                onChangeText={(t) => updateItem(idx, 'desc', t)}
-                style={{ backgroundColor: 'transparent', height: 40 }}
-                placeholder={language === 'en' ? 'Remark' : '备注'}
-              />
-            </View>
-            <View className="w-1/6 items-end">
+          <View key={idx} className="mb-4 border border-border p-4 rounded-md bg-background">
+            <Text className="mb-3 font-bold text-textPrimary">{item.point}</Text>
+            <View className="flex-row flex-wrap items-end gap-3">
+              <View style={{ width: 180 }}>
+                <DropdownField label="Result" value={item.result} options={RESULT_OPTIONS} onChangeValue={(v) => updateItem(idx, 'result', v)} width="100%" />
+              </View>
+              <View style={{ width: 200 }}>
+                <TextField label="Remark (Chinese)" value={item.remark_cn || ''} onChangeText={(v) => updateItem(idx, 'remark_cn', v)} width="100%" />
+              </View>
+              <View style={{ width: 200 }}>
+                <TextField label="Remark (English)" value={item.remark_en || ''} onChangeText={(v) => updateItem(idx, 'remark_en', v)} width="100%" />
+              </View>
               <PhotoSlot label="Image" uri={item.photo} onChange={(uri) => updateItem(idx, 'photo', uri)} />
             </View>
           </View>

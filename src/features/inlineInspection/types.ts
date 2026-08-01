@@ -52,7 +52,7 @@ export interface InlineInspectionData {
   };
   production_status_photos: Array<{ file: string; status: string }>;
   pre_packaged: Array<{ file: string; status: string }>;
-  check_point_list: Array<{ point: string; result: string; desc?: string; photo: string }>;
+  check_point_list: Array<{ point: string; result: string; desc?: string; remark_cn?: string; remark_en?: string; photo: string }>;
   workmanship_defects: {
     critical: number;
     major: number;

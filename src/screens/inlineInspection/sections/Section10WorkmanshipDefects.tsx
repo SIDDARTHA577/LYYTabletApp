@@ -3,9 +3,9 @@ import { View, Text } from 'react-native';
 import { Button, IconButton, Switch, Modal, Portal, TextInput as PaperTextInput } from 'react-native-paper';
 import { SectionCard } from '../../../components/SectionCard';
 import { FormRow } from '../../../components/form/FormRow';
-import { TextField } from '../../../components/form/TextField';
 import { NumberField } from '../../../components/form/NumberField';
 import { DropdownField } from '../../../components/form/DropdownField';
+import { ComboBoxField } from '../../../components/form/ComboBoxField';
 import type { InlineInspectionData } from '../../../features/inlineInspection/types';
 import tokens from '../../../theme/tokens';
 import { useLanguage } from '../../../i18n/LanguageContext';
@@ -44,6 +44,15 @@ export function Section10WorkmanshipDefects({ data, onChange }: { data: Data; on
   const [positionModalVisible, setPositionModalVisible] = useState(false);
   const [newPosCn, setNewPosCn] = useState('');
   const [newPosEn, setNewPosEn] = useState('');
+  const [improvementCnHistory, setImprovementCnHistory] = useState(IMPROVEMENT_MEASURES_CN.map((o) => o.value));
+  const [improvementEnHistory, setImprovementEnHistory] = useState(IMPROVEMENT_MEASURES_EN.map((o) => o.value));
+
+  const commitImprovementCn = (v: string) => {
+    if (v && !improvementCnHistory.includes(v)) setImprovementCnHistory([...improvementCnHistory, v]);
+  };
+  const commitImprovementEn = (v: string) => {
+    if (v && !improvementEnHistory.includes(v)) setImprovementEnHistory([...improvementEnHistory, v]);
+  };
 
   const addDefect = (isCustom = false) => {
     onChange({ defects: [...data.defects, { type: '', position: '', content_cn: '', content_en: '', desc_cn: '', desc_en: '', corrective_cn: '', corrective_en: '', pre_alert: false, is_custom: isCustom }] });
@@ -94,22 +103,22 @@ export function Section10WorkmanshipDefects({ data, onChange }: { data: Data; on
             <FormRow>
               <DropdownField label="Type" value={defect.type} options={TYPE_OPTIONS} onChangeValue={(v) => updateDefect(idx, 'type', v)} />
               <DropdownField label="Position" value={defect.position} options={positionOptions} onChangeValue={(v) => updateDefect(idx, 'position', v)} />
-              
-              {defect.is_custom ? (
-                <>
-                  <TextField label="Content CN" labelCn="缺陷内容(中)" value={defect.content_cn} onChangeText={(v) => updateDefect(idx, 'content_cn', v)} />
-                  <TextField label="Content EN" labelCn="缺陷内容(英)" value={defect.content_en} onChangeText={(v) => updateDefect(idx, 'content_en', v)} />
-                </>
-              ) : (
-                <>
-                  <DropdownField label="Content CN" value={defect.content_cn} options={[{ label: 'System Value CN', value: 'System Value CN' }]} onChangeValue={(v) => updateDefect(idx, 'content_cn', v)} />
-                  <DropdownField label="Content EN" value={defect.content_en} options={[{ label: 'System Value EN', value: 'System Value EN' }]} onChangeValue={(v) => updateDefect(idx, 'content_en', v)} />
-                </>
-              )}
-              
-              <DropdownField label="Desc EN" value={defect.desc_en} options={DESC_EN_OPTIONS} onChangeValue={(v) => updateDefect(idx, 'desc_en', v)} />
-              <DropdownField label="Improvement Measures CN" value={defect.corrective_cn} options={IMPROVEMENT_MEASURES_CN} onChangeValue={(v) => updateDefect(idx, 'corrective_cn', v)} />
-              <DropdownField label="Improvement Measures EN" value={defect.corrective_en} options={IMPROVEMENT_MEASURES_EN} onChangeValue={(v) => updateDefect(idx, 'corrective_en', v)} />
+
+              <DropdownField label="Defect Content EN" value={defect.desc_en} options={DESC_EN_OPTIONS} onChangeValue={(v) => updateDefect(idx, 'desc_en', v)} />
+              <ComboBoxField
+                label="Improvement Measures CN"
+                value={defect.corrective_cn}
+                onChangeText={(v) => updateDefect(idx, 'corrective_cn', v)}
+                onCommit={commitImprovementCn}
+                suggestions={improvementCnHistory}
+              />
+              <ComboBoxField
+                label="Improvement Measures EN"
+                value={defect.corrective_en}
+                onChangeText={(v) => updateDefect(idx, 'corrective_en', v)}
+                onCommit={commitImprovementEn}
+                suggestions={improvementEnHistory}
+              />
               
               <View className="flex-row items-center min-w-[200px] mt-2">
                 <Switch value={defect.pre_alert} onValueChange={(v) => updateDefect(idx, 'pre_alert', v)} color={tokens.color.primary} />
